@@ -1,3 +1,7 @@
+require_relative('../db/sql_runner.rb')
+require 'pg'
+require 'pry'
+
 class Class
 
   attr_reader :id, :type, :time, :venue_id
@@ -6,14 +10,14 @@ class Class
     @id = options['id'].to_i if options['id']
     @type = options['type']
     @time = options['time']
-    @venue_id = options['venue_id'].to_i
+    @venue_id = options['venue_id'].to_i if options['venue_id']
   end
 
   def save
     sql ="INSERT INTO classes (
     type, time, venue_id
     ) VALUES (
-    '#{ @type }', '#{ @time }', #{ @venue_id }
+    '#{ @type }', time '#{ @time }', #{ @venue_id }
     ) RETURNING *"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
@@ -27,7 +31,7 @@ class Class
     WHERE id = '#{@id}';"
     SqlRunner.run(sql) 
   end
-  
+
   def self.delete(id)
     sql = "DELETE FROM classes where id = #{id}"
     SqlRunner.run( sql )

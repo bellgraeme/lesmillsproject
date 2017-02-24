@@ -3,7 +3,6 @@ DROP TABLE classes;
 DROP TABLE venues;
 DROP TABLE students;
 
-
 CREATE TABLE venues(
 id SERIAL4 PRIMARY KEY,
 name VARCHAR(255),
@@ -21,7 +20,7 @@ CREATE  TABLE classes(
 id SERIAL4 PRIMARY KEY,
 type VARCHAR(255),
 time TIME,
-venue_id INT4 references venues(id)
+venue_id VARCHAR(255) references venues(id)
 );
 
 CREATE  TABLE register(

@@ -1,3 +1,7 @@
+require_relative('../db/sql_runner.rb')
+require 'pg'
+require 'pry'
+
 class Student
 
   attr_reader :id, :name, :age, :gender

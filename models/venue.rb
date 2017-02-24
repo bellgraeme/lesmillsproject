@@ -1,3 +1,7 @@
+require_relative('../db/sql_runner.rb')
+require 'pg'
+require 'pry'
+
 class Venue
 
 attr_reader :id, :name, :location
