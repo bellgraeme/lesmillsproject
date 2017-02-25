@@ -10,6 +10,13 @@ class Register
     @student_id = options['student_id'].to_i
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM register WHERE id=#{id};"
+    register = SqlRunner.run( sql )
+    result = Register.new( register.first )
+    return result
+  end
+
   def save
     sql ="INSERT INTO register (
     class_id, student_id
@@ -28,7 +35,7 @@ class Register
     SqlRunner.run(sql) 
   end
 
-  def delete(id)
+  def delete
     sql = "DELETE FROM register where id = #{id}"
     SqlRunner.run( sql )
   end

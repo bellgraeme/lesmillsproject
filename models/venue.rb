@@ -12,6 +12,13 @@ class Venue
     @location = options['location']
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM venues WHERE id = #{id};"
+    venue = SqlRunner.run( sql )
+    result = Venue.new( venue.first )
+    return result
+  end
+
   def save
     sql ="INSERT INTO venues (
     name, location
@@ -30,7 +37,7 @@ class Venue
     SqlRunner.run(sql) 
   end
 
-  def delete(id)
+  def delete
     sql = "DELETE FROM venues where id = #{id}"
     SqlRunner.run( sql )
   end

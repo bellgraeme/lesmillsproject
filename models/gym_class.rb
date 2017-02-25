@@ -15,6 +15,13 @@ class GymClass
     @venue_id = options['venue_id'].to_i if options['venue_id']
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM classes WHERE id=#{id};"
+    gymclass = SqlRunner.run( sql )
+    result = Veune.new( gymclass.first )
+    return result
+  end
+
   def save
     sql ="INSERT INTO classes (
     type, time, venue_id
@@ -34,7 +41,7 @@ class GymClass
     SqlRunner.run(sql) 
   end
 
-  def delete(id)
+  def delete
     sql = "DELETE FROM classes where id = #{id}"
     SqlRunner.run( sql )
   end

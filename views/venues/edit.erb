@@ -1,0 +1,17 @@
+<form method= "POST" action = "/venues/<%= @venue.id %>">
+  <label for="name">Name:</label>
+  <input
+  type="text"
+  id="name"
+  name="name"
+  value="<%= @venue.name %>"/>
+
+  <label for="location">Location:</label>
+  <input type="text"
+  id="location"
+  name="location"
+  value="<%= @venue.location %>"/>
+
+  <input type="submit" value="Update Venue"/>
+
+</form>

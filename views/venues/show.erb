@@ -1,0 +1,9 @@
+<p>First name: <%= @venues.name %></p>
+<p>Last name: <%= @venues.location %></p>
+
+<a href="/venues/<%= @venues.id %>/edit">Edit Order</a>
+
+<form method="GET" action="/venues/<%= @venues.id %>/edit">
+  <input type="submit" value="Edit Venue"/>
+</form>
+

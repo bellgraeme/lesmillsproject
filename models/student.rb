@@ -16,6 +16,13 @@ class Student
     @gender = options['gender']
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM students WHERE id=#{id};"
+    student = SqlRunner.run( sql )
+    result = Student.new( student.first )
+    return result
+  end
+
   def save
     sql ="INSERT INTO students (
     first_name, last_name, age, gender
@@ -36,7 +43,7 @@ class Student
     SqlRunner.run(sql) 
   end
 
-  def delete(id)
+  def delete
     sql = "DELETE FROM students where id = #{id}"
     SqlRunner.run( sql )
   end
