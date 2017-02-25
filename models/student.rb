@@ -1,4 +1,6 @@
 require_relative('../db/sql_runner.rb')
+# require_relative('venue.rb')
+# require_relative('gym_class.rb')
 require 'pg'
 require 'pry'
 
@@ -8,16 +10,17 @@ class Student
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
-    @name = options['name']
+    @first_name = options['first_name']
+    @last_name = options['last_name']
     @age = options['age'].to_i
     @gender = options['gender']
   end
 
   def save
     sql ="INSERT INTO students (
-    name, age, gender
+    first_name, last_name, age, gender
     ) VALUES (
-    '#{ @name }', #{ @age }, '#{@gender}'
+    '#{ @first_name }','#{@last_name}', #{ @age }, '#{@gender}'
     ) RETURNING *"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
@@ -25,14 +28,15 @@ class Student
 
   def update
     sql = "UPDATE students SET
-    name = '#{@name}',
-    age = '#{@age}'
+    first_name = '#{@first_name}',
+    last_name = '#{@last_name}',
+    age = #{@age}
     gender = '#{@gender}'
-    WHERE id = '#{@id}';"
+    WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end
 
-  def self.delete(id)
+  def delete(id)
     sql = "DELETE FROM students where id = #{id}"
     SqlRunner.run( sql )
   end
@@ -42,7 +46,7 @@ class Student
     self.get_many(sql)
   end
 
-  def delete_all
+  def self.delete_all
     sql = "DELETE FROM students;" 
     SqlRunner.run(sql) 
   end
@@ -53,5 +57,21 @@ class Student
     return result   
   end
 
+  def classes
+    sql= "SELECT classes.* FROM classes 
+    INNER JOIN register ON register.class_id = classes.id
+    where register.class_id = #{@id};"
+    result = GymClass.get_many(sql)
+    return result
+  end
+
+  def venue
+    sql = "SELECT venues.* FROM venues
+    INNER JOIN classes ON classes.venue_id = venues.id
+    INNER JOIN register on classes.id = register.class_id
+    WHERE register.student_id = #{@id};"
+    result = Venue.get_many(sql)
+    return result
+  end
 
 end

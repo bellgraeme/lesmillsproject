@@ -1,8 +1,10 @@
 require_relative('../db/sql_runner.rb')
+# require_relative('student.rb')
+# require_relative('venue.rb')
 require 'pg'
 require 'pry'
 
-class Class
+class GymClass
 
   attr_reader :id, :type, :time, :venue_id
 
@@ -27,12 +29,12 @@ class Class
     sql = "UPDATE classes SET
     name = '#{@name}',
     time = '#{@time}'
-    venue_id = '#{@venue_id}'
-    WHERE id = '#{@id}';"
+    venue_id = #{@venue_id}
+    WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end
 
-  def self.delete(id)
+  def delete(id)
     sql = "DELETE FROM classes where id = #{id}"
     SqlRunner.run( sql )
   end
@@ -42,15 +44,30 @@ class Class
     self.get_many(sql)
   end
 
-  def delete_all
+  def self.delete_all
     sql = "DELETE FROM classes;" 
     SqlRunner.run(sql) 
   end
 
   def self.get_many(sql)
     classes = SqlRunner.run(sql)
-    result = classes.map{ |x| Class.new(x) }
+    result = classes.map{ |x| GymClass.new(x) }
     return result   
+  end
+
+  def students
+    sql = "SELECT students.* FROM students
+    INNER JOIN register ON register.student_id = students.id
+    WHERE register.student_id = #{@id};"
+    result = Student.get_many(sql)
+    return result 
+  end
+
+  def venue
+    sql = "SELECT venues.* FROM venues
+    INNER JOIN classes ON classes.venue_id = venues.id
+    where classes.venue_id = #{@id};"
+    return Venue.get_many(sql)
   end
 
 

@@ -24,11 +24,11 @@ class Register
     sql = "UPDATE register SET
     name = '#{@name}',
     location = '#{@location}'
-    WHERE id = '#{@id}';"
+    WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end
 
-  def self.delete(id)
+  def delete(id)
     sql = "DELETE FROM register where id = #{id}"
     SqlRunner.run( sql )
   end
@@ -38,7 +38,7 @@ class Register
     self.get_many(sql)
   end
 
-  def delete_all
+  def self.delete_all
     sql = "DELETE FROM register;" 
     SqlRunner.run(sql) 
   end

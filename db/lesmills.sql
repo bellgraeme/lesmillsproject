@@ -11,7 +11,8 @@ location VARCHAR(255)
 
 CREATE TABLE students(
 id SERIAL4 PRIMARY KEY,
-name VARCHAR(255),
+first_name VARCHAR(255),
+last_name VARCHAR(255),
 age INT4,
 gender VARCHAR(8)
 );
@@ -20,7 +21,7 @@ CREATE  TABLE classes(
 id SERIAL4 PRIMARY KEY,
 type VARCHAR(255),
 time TIME,
-venue_id VARCHAR(255) references venues(id)
+venue_id INT4 references venues(id)
 );
 
 CREATE  TABLE register(
