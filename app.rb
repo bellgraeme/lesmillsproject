@@ -1,13 +1,15 @@
-require_relative('models/class.rb')
-require_relative('models/register.rb')
-require_relative('models/student.rb')
-require_relative('models/venue.rb')
-require 'pg'
-require 'pry'
-require 'pry-byebug'
+require( 'sinatra' )
+require( 'sinatra/contrib/all' )
+require_relative('controllers/classes_controller')
+require_relative('controllers/students_controller')
+require_relative('controllers/venues_controller')
+require_relative('controllers/register_controller')
+
+get '/' do
+  erb( :index )
+end
 
 
 
 
-binding.pry
-nil
+
