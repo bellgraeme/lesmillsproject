@@ -18,31 +18,23 @@ class GymClass
   def self.find( id )
     sql = "SELECT * FROM classes WHERE id=#{id};"
     gymclass = SqlRunner.run( sql )
-    result = Veune.new( gymclass.first )
+    result = GymClass.new( gymclass.first )
     return result
   end
 
   def save
-    sql ="INSERT INTO classes (
-    type, time, venue_id
-    ) VALUES (
-    '#{ @type }', time '#{ @time }', #{ @venue_id }
-    ) RETURNING *"
+    sql ="INSERT INTO classes (type, time, venue_id) VALUES ('#{ @type }', '#{ @time }',#{ @venue_id }) RETURNING id;"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
   end
 
   def update
-    sql = "UPDATE classes SET
-    name = '#{@name}',
-    time = '#{@time}'
-    venue_id = #{@venue_id}
-    WHERE id = #{@id};"
+    sql = "UPDATE classes SET (type, time, venue_id)=('#{@type}', '#{@time}', #{@venue_id}) WHERE id = #{id};"
     SqlRunner.run(sql) 
   end
 
   def delete
-    sql = "DELETE FROM classes where id = #{id}"
+    sql = "DELETE FROM classes WHERE id = #{id}"
     SqlRunner.run( sql )
   end
 

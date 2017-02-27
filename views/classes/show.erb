@@ -1,1 +1,18 @@
-show.erb
+
+<p>Type: <%= @gymclass.type %></p>
+<% for venue in @venues%>
+  <% if venue.id == @gymclass.venue_id %>
+<p>Location: <%= venue.location %></p>
+<p>Venue: <%= venue.name %></p>
+<%end%><%end%>
+<p>Time: <%=@gymclass.time%></p>
+
+<form action="/classes/<%= @gymclass.id %>/edit">
+<input type="submit" value= "Edit"></form>
+
+<form action = "/classes/<%=@gymclass.id%>/delete" method = "POST">
+<input type="submit" value="Delete" >
+</form>
+
+
+

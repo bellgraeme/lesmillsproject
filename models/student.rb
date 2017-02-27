@@ -6,7 +6,7 @@ require 'pry'
 
 class Student
 
-  attr_reader :id, :name, :age, :gender
+  attr_reader :id, :first_name, :last_name, :age, :gender
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -14,6 +14,9 @@ class Student
     @last_name = options['last_name']
     @age = options['age'].to_i
     @gender = options['gender']
+  end
+  def full_name
+    self.first_name + " " + self.last_name  
   end
 
   def self.find( id )
@@ -24,21 +27,15 @@ class Student
   end
 
   def save
-    sql ="INSERT INTO students (
-    first_name, last_name, age, gender
-    ) VALUES (
-    '#{ @first_name }','#{@last_name}', #{ @age }, '#{@gender}'
-    ) RETURNING *"
+    sql ="INSERT INTO students (first_name, last_name, age, gender) VALUES 
+    ('#{ @first_name }','#{@last_name}', #{ @age }, '#{@gender}') RETURNING *"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
   end
 
   def update
-    sql = "UPDATE students SET
-    first_name = '#{@first_name}',
-    last_name = '#{@last_name}',
-    age = #{@age}
-    gender = '#{@gender}'
+    sql = "UPDATE students SET (first_name, last_name, age, gender) =
+     ('#{@first_name}', '#{@last_name}', #{@age}, '#{@gender}')
     WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end

@@ -17,26 +17,17 @@ get '/venues/new' do
   erb(:"venues/new")
 end
 
-
 # SHOW - READ for ID
-  get '/venues/:id' do #:id is a string for  params[:id]
-  @venues = Venue.find( params[:id] )
+  get '/venues/:id' do 
+  @venue = Venue.find( params[:id] )
   erb (:"venues/show")
  end 
-
-
 
 # CREATE - CREATE - submit form
  post '/venues' do
     @venue = Venue.new(params)
     @venue.save()
     erb(:"venues/create")
-
- # no confirm
- # post '/venues' do
- # @venue = Venue.new(params)
- # @venue.save
- # redirect to '/venues/' +venue.id.to_s
 end
 
 # EDIT- UPDATE - Create form
@@ -57,7 +48,7 @@ end
 post '/venues/:id/delete' do
  @venue = Venue.find(params[:id]) 
  @venue.delete
-erb(:"venues/delete")
+redirect to '/venues'
 end
 
 

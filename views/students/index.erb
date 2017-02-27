@@ -1,1 +1,22 @@
+<h1>Students</h1>
 
+<p class="btn--wrapper">
+  <a class="btn btn--action" href="/students/new">Enroll Student</a>
+</p>
+
+<ul>
+  <% for student in @students %>
+  <li>
+  <p> First Name: <%=student.first_name %></p>
+  <p> Last Name: <%=student.last_name %></p>
+  <p>Age: <%=student.age %></p>
+  <p>Gender: <%=student.gender %></p>
+    <p>
+      <form action="/students/<%= student.id %>" method="GET">
+        <input class="btn btn--danger" type="submit" value="View" />
+      </form>
+      <hr />
+    </p>
+  </li>
+  <% end %>
+</ul>

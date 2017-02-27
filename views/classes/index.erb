@@ -1,0 +1,28 @@
+<h1>Classes</h1>
+
+<p>
+  <a href="/classes/new">New Class</a>
+</p>
+
+<ul>
+  <% for gymclass in @gymclasses %>
+  <li>
+    <p>Type: <%=gymclass.type %></p>
+    <p>Time: <%=gymclass.time %></p>
+    <% for venue in @venues%>
+    <% if venue.id == gymclass.venue_id%>
+    <p>Location: <%= venue.location %></p>
+    <p>Gym Name: <%= venue.name %></p>
+    <% end %><% end %>
+      <form action="/classes/<%= gymclass.id %>" method="GET">
+        <input  type="submit" value="View" />
+      </form>
+
+      <form action="/register/<%= gymclass.id%>" method="GET">
+      <input  type="submit" value="Add Student"/>
+      </form>
+    
+    <hr />   
+  </li>
+  <% end %> 
+</ul>

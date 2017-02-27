@@ -30,9 +30,7 @@ class Venue
   end
 
   def update
-    sql = "UPDATE venues SET
-    name = '#{@name}',
-    location = '#{@location}'
+    sql = "UPDATE venues SET (name,location)  = ('#{@name}','#{@location}')
     WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end

@@ -6,31 +6,54 @@ require_relative( '../models/register.rb' )
 require_relative( '../models/student.rb' )
 require_relative( '../models/venue.rb' )
 
-
+# INDEX - READ for ALL
 get '/classes' do
-	@classes = GymClass.all
-	erb (:"classes/index")
+ @gymclasses = GymClass.all()
+ @venues = Venue.all()
+  erb (:'classes/index')
 end
 
+# NEW -  CREATE - get form
 get '/classes/new' do
-	@classes = GymClass.all
-	erb(:"classes/new")
+  @venues = Venue.all()
+  erb(:"classes/new")
 end
 
-post '/classes' do 
-	gymclass = GymClass.new(params)
-	gymclass.save
-	redirect to ("/classes")
+# SHOW - READ for ID
+  get '/classes/:id' do 
+  @gymclass = GymClass.find( params[:id] )
+  @venues = Venue.all()
+  erb (:"classes/show")
+ end 
+
+# CREATE - CREATE - submit form
+ post '/classes' do
+    @venues = Venue.all()
+    @gymclass = GymClass.new(params)
+    @gymclass.save()
+    erb(:"classes/create")
 end
 
-post '/classes/:id/delete' do 
-	gymclass = GymClass.new(params)
-	gymclass.save
-	redirect to ("/classes")
+# EDIT- UPDATE - Create form
+get '/classes/:id/edit' do
+ @gymclass = GymClass.find( params[:id] )
+ @venues = Venue.all
+ erb(:"classes/update")
 end
 
-post 'classes/:id/update' do 
-	gymclass = GymClass.new(params)
-	gymclass.update
-	redirect to ("/classes")
+# UPDATE - UPDATE - submit form
+post '/classes/:id' do
+  @venues = Venue.all
+  @gymclass = GymClass.new(params)
+  @gymclass.update() 
+  erb(:"classes/update")
+  redirect to "/classes"
 end
+
+# DESTROY - DELETE
+post '/classes/:id/delete' do
+ @gymclass = GymClass.find(params[:id]) 
+ @gymclass.delete
+redirect to '/classes'
+end
+

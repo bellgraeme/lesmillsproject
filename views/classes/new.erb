@@ -1,9 +1,41 @@
-<h1>Please enter details of a new Gym Class</h1>
 
-<form action= "/classes" method= "post">
+<nav> 
+<h2>Venue List</h2>
+  <ul>
+  <% for venue in @venues%>
+    <li> 
+        Venue ID: <%= venue.id %> Venue Name: <%= venue.name %> Venue Location: <%= venue.location %><br>
+    </li><%end%>
+  </ul>
+</nav>
+<form method="POST" action="/classes">
 
-<p> Enter Class Details</p>
-	
+  <label for="type">Type:</label>
+  <input type="text" id="type" name="type"/>
 
+  <label for="time">Time:</label>
+  <input type="text" id="time" name="time" />
+
+
+  <label for="venue_id">Venue ID:</label>
+  <select id="venue_id" name="venue_id">
+  <% for venue in @venues%>
+    <option><%= venue.id%></option>
+    <%end%>
+
+  <input type="submit" value="Create"/>
 
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,6 +4,8 @@ require 'pry'
 
 class Register
 
+  attr_reader :id, :class_id, :student_id
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @class_id = options['class_id'].to_i
@@ -18,19 +20,13 @@ class Register
   end
 
   def save
-    sql ="INSERT INTO register (
-    class_id, student_id
-    ) VALUES (
-    #{ @class_id }, #{ @student_id }
-    ) RETURNING *"
+    sql ="INSERT INTO register (class_id, student_id) VALUES (#{ @class_id }, #{ @student_id }) RETURNING *"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
   end
 
   def update
-    sql = "UPDATE register SET
-    name = '#{@name}',
-    location = '#{@location}'
+    sql = "UPDATE register SET(class_id, student_id) = (#{@class_id}, #{@student_id})
     WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end
@@ -55,8 +51,4 @@ class Register
     result = register.map{ |x| Venue.new(x) }
     return result   
   end
-
-
-
-
 end

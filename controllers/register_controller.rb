@@ -6,30 +6,54 @@ require_relative( '../models/register.rb' )
 require_relative( '../models/student.rb' )
 require_relative( '../models/venue.rb' )
 
-# get '/classes' do
-# 	@classes = GymClass.all
-# 	erb (:"classes/index")
-# end
+# INDEX - READ for ALL
+get '/register' do
+ @classes = GymClass.all()
+ @students = Student.all()
+ erb (:'register/index')
+end
 
-# get '/classes/new' do
-# 	@classes = GymClass.all
-# 	erb(:"classes/new")
-# end
+# NEW -  CREATE - get form
+get '/register/new' do
+  @students = Student.all
+  @gymclass = GymClass.new(params)
+  erb(:"register/new")
+end
 
-# post '/classes' do 
-# 	gymclass = GymClass.new(params)
-# 	gymclass.save
-# 	redirect to ("/classes")
-# end
+# SHOW - READ for ID
+get '/register/:id' do 
+  @gymclass = GymClass.find( params[:id] )
+  @students = Student.all()
+  erb (:"register/show")
+end 
 
-# post '/classes/:id/delete' do 
-# 	gymclass = GymClass.new(params)
-# 	gymclass.save
-# 	redirect to ("/classes")
-# end
+# CREATE - CREATE - submit form
+post '/register' do
+  @register = Register.new(params)
+  @register.save()
+  redirect to '/register'
+end
 
-# post 'classes/:id/update' do 
-# 	gymclass = GymClass.new(params)
-# 	gymclass.update
-# 	redirect to ("/classes")
-# end
+
+
+# EDIT- UPDATE - Create form
+get '/register/:id/edit' do
+  @register = Register.find( params[:id] )
+  erb(:"register/update")
+end
+
+# UPDATE - UPDATE - submit form
+post '/register/:id' do
+  @register = Register.new(params)
+  @register.update()
+  erb(:"register/update")
+  redirect to "/register/#{@register.id}"
+end
+
+# DESTROY - DELETE
+post '/register/:id/delete' do
+ @register = Register.find(params[:id]) 
+ @register.delete
+ redirect to '/students'
+end
+

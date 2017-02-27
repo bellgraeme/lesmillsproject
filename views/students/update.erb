@@ -1,0 +1,29 @@
+<form method= "POST" action = "/students/<%= @student.id %>">
+  <label for="first-name">First Name:</label>
+  <input
+  type="text"
+  id="first-name"
+  name="first_name"
+  value="<%= @student.first_name %>"/>
+
+  <label for="last-name">Last Name:</label>
+  <input type="text"
+  id="last-name"
+  name="last_name"
+  value="<%= @student.last_name %>"/>
+
+  <label for="age">Age:</label>
+  <input type="text"
+  id="age"
+  name="age"
+  value="<%= @student.age %>"/>
+
+  <label for="gender">Gender:</label>
+  <input type="text"
+  id="gender"
+  name="gender"
+  value="<%= @student.gender %>"/>
+
+  <input type="submit" value="Update"/>
+
+</form>
