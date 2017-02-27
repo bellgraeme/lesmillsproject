@@ -13,6 +13,25 @@
 <form action = "/classes/<%=@gymclass.id%>/delete" method = "POST">
 <input type="submit" value="Delete" >
 </form>
+<div>
+<h2>Students</h2>
+
+
+<ul>
+  <li>
+  <% for student in @students  do%>
+  <p><%= student.full_name%></p>
+  <p>Age: <%=student.age %></p>
+  <p>Gender: <%=student.gender %></p>
+  <form action = "/register/<%=student.id%>/delete" method = "POST">
+  <input type="submit" value="Delete" >
+  <hr/>    
+  </li><%end%>
+</ul>
+
+
+</div>
+
 
 
 

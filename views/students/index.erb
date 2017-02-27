@@ -1,7 +1,7 @@
 <h1>Students</h1>
 
-<p class="btn--wrapper">
-  <a class="btn btn--action" href="/students/new">Enroll Student</a>
+<p>
+  <a  href="/students/new">Enroll Student</a>
 </p>
 
 <ul>
@@ -13,7 +13,7 @@
   <p>Gender: <%=student.gender %></p>
     <p>
       <form action="/students/<%= student.id %>" method="GET">
-        <input class="btn btn--danger" type="submit" value="View" />
+        <input  type="submit" value="View" />
       </form>
       <hr />
     </p>

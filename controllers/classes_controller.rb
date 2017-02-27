@@ -20,9 +20,10 @@ get '/classes/new' do
 end
 
 # SHOW - READ for ID
-  get '/classes/:id' do 
+get '/classes/:id' do 
   @gymclass = GymClass.find( params[:id] )
   @venues = Venue.all()
+  @students = @gymclass.students
   erb (:"classes/show")
  end 
 
@@ -54,6 +55,6 @@ end
 post '/classes/:id/delete' do
  @gymclass = GymClass.find(params[:id]) 
  @gymclass.delete
-redirect to '/classes'
+redirect to "/classes/:(params[:id])"
 end
 

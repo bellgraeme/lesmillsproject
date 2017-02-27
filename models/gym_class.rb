@@ -57,7 +57,7 @@ class GymClass
   def students
     sql = "SELECT students.* FROM students
     INNER JOIN register ON register.student_id = students.id
-    WHERE register.student_id = #{@id};"
+    WHERE register.class_id = #{@id};"
     result = Student.get_many(sql)
     return result 
   end
@@ -65,7 +65,7 @@ class GymClass
   def venue
     sql = "SELECT venues.* FROM venues
     INNER JOIN classes ON classes.venue_id = venues.id
-    where classes.venue_id = #{@id};"
+    where classes.id = #{@id};"
     return Venue.get_many(sql)
   end
 

@@ -1,39 +1,7 @@
 
 
-<div>
-<h2>Classes</h2>
-  <ul>
-    <%for gymclass in @classes%>
-    <li>Type: <%=gymclass.type%><br>Time: <%= gymclass.time%><br>
-      ID no.:<%=gymclass.id%>   
-      </li>
-      <%end%>
-  </ul>
-</div>
-<div>
-<H2> and Students</H2>
-  <ul>
-    
-      <%for student in @students%>
-     <li>Name <%=student.full_name%> <br>
-      ID no.:<%=student.id%>
-    </li>
-      <%end%>
-  </ul>
-</div>
-<section>
-<form method = "POST" action= '/register'>
-  <label for="student-id">Student ID:</label>
-  <select id="student-id" name="student_id">
-  <% for student in @students%>
-    <option value = "<%= student.id%></"><%= student.id%></option>
-    <%end%></select>
+<a href="/"></a>
 
-<label for ="class-id">Class ID:</label>
-    <select id='class-id' name = "class_id"><%for gymclass in @classes%>
-    <option value ="<%=gymclass.id%>"><%=gymclass.id%></option>
-<%end%></select>
-    <input type="submit" value="Submit" >
-    </form>
 
-</section>
+
+

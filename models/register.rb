@@ -31,6 +31,13 @@ class Register
     SqlRunner.run(sql) 
   end
 
+  def self.find_by_student(id)
+    sql = "SELECT  * FROM register where student_id = #{id}"
+    register = SqlRunner.run( sql )
+    result = Register.new( register.first )
+    return result
+  end
+
   def delete
     sql = "DELETE FROM register where id = #{id}"
     SqlRunner.run( sql )

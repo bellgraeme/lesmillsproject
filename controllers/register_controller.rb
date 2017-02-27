@@ -8,6 +8,7 @@ require_relative( '../models/venue.rb' )
 
 # INDEX - READ for ALL
 get '/register' do
+  @register =Register.all()
  @classes = GymClass.all()
  @students = Student.all()
  erb (:'register/index')
@@ -31,7 +32,7 @@ end
 post '/register' do
   @register = Register.new(params)
   @register.save()
-  redirect to '/register'
+  redirect to '/classes'
 end
 
 
@@ -52,8 +53,9 @@ end
 
 # DESTROY - DELETE
 post '/register/:id/delete' do
- @register = Register.find(params[:id]) 
+ @register = Register.find_by_student(params[:id])
+ puts @register
  @register.delete
- redirect to '/students'
+ redirect to "/classes"
 end
 
