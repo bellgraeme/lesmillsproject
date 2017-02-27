@@ -55,6 +55,6 @@ end
 post '/classes/:id/delete' do
  @gymclass = GymClass.find(params[:id]) 
  @gymclass.delete
-redirect to "/classes/:(params[:id])"
+redirect to "/classes"
 end
 

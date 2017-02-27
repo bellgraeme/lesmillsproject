@@ -1,10 +1,9 @@
 <h1>Venues</h1>
 
-<p class="btn--wrapper">
-  <a class="btn btn--action" href="/venues/new">Create New Venue</a>
-</p>
 
-<ul>
+  <a  class = "button" href="/venues/new">Create New Venue</a>
+
+<ul class = "list">
   <% for venue in @venues %>
   <li>
   <p>Name: <%=venue.name %></p>
