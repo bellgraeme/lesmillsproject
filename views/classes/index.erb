@@ -15,6 +15,7 @@
     <p>Location: <%= venue.location %></p>
     <p>Gym Name: <%= venue.name %></p>
     <% end %><% end %>
+    <div id="bttn-cont" >
       <form action="/classes/<%= gymclass.id %>" method="GET">
         <input  type="submit" value="View" />
       </form>
@@ -22,7 +23,7 @@
       <form action="/register/<%= gymclass.id%>" method="GET">
       <input  type="submit" value="Add Student"/>
       </form>
-    
+    </div>
     <hr />   
   </li>
   <% end %> 
