@@ -102,7 +102,7 @@ input[type=submit] {
   margin-left: 16;
 }
 
-#bttn-cont{
+.bttn-cont{
   display: inline-flex;
   justify-content: center;
 

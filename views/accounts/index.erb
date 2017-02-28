@@ -1,0 +1,27 @@
+<div>
+<h2>Balances of your bank accounts</h2>
+<%for bank in @banks do%>
+<p>Type: <%=bank.type%></p>
+<p>Balance: <%=bank.balance%></p>
+<%end%>
+</div >
+<div class ="bttn-cont"><a class = "button" href="/accounts/new">Create CLient</a>
+<a class = "button" href="/payments">View Payments</a>
+</div>
+<div>
+  <h2>Client list</h2>
+
+  <ul>
+    <%for client in @clients do%>
+    <li>
+      <p>Name: <%= client.name   %></p>
+      <p>Balance: <%=client.balance %> </p>
+      <hr>
+    </li>
+<%end%>
+  </ul>
+
+</div>
+
+
+

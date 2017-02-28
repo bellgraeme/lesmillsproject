@@ -11,19 +11,19 @@ require_relative( '../models/payment.rb' )
 
 
 # INDEX - READ for ALL
-get '/payments' do
+get '/accounts' do
   @banks = Bank.all()
   @clients =Client.all()
   @payments = Payment.all()
-  erb (:"payments/index")
+  erb (:"accounts/index")
 end
 
 # NEW -  CREATE - get form
-get '/payments/new' do
+get '/accounts/new' do
   @banks = Bank.all()
   @clients =Client.all()
   @payments = Payment.all()
-  erb(:"payments/new")
+  erb(:"accounts/new")
 end
 
 # SHOW - READ for ID
@@ -39,35 +39,16 @@ post '/payments' do
   @banks = Bank.all()
   @clients =Client.all()
   @payment = Payment.new(params)
-  @bank = Bank.find(params[:bank_id])
-  @bank.payment(params[:amount])
-  @client = Client.find(params[:client_id])
-  @client.billing(params[:amount])
-  @bank.update
-  @client.update
   @payment.save()
-  erb(:"payments/create")
+  erb(:"accounts/create")
 end
-
-post '/payments/billing' do
-  @banks = Bank.all()
-  @clients =Client.all()
-  @payment = Payment.new(params)
-  @bank = Bank.find(params[:bank_id])
-  @bank.billing(params[:amount])
-  @client = Client.find(params[:client_id])
-  @client.payment(params[:amount])
-  @bank.update
-  @client.update
-  @payment.save()
-  erb(:"payments/billing")
-  end
 
 # EDIT- UPDATE - Create form
 get '/payments/:id/edit' do
   @banks = Bank.all()
   @clients =Client.all()
   @payment = Payment.find( params[:id] )
+  @payment.update
   erb(:"payments/update")
 end
 

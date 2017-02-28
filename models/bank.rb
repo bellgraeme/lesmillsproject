@@ -11,8 +11,8 @@ class Bank
 
   def self.find( id )
     sql = "SELECT * FROM bank WHERE id= #{id};"
-    student = SqlRunner.run( sql )
-    result = Student.new( student.first )
+    bank = SqlRunner.run( sql )
+    result = Bank.new( bank.first )
     return result
   end
 
@@ -22,9 +22,19 @@ class Bank
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
   end
+  
+  def billing(amount)
+    sql= "UPDATE clients SET (balance) = (balance - amount) WHERE id = #{@id};"
+    SqlRunner.run(sql) 
+  end
+
+  def payment(amount)
+    sql= "UPDATE banks SET (balance) = (balance + amount) WHERE id = #{@id};"
+    SqlRunner.run(sql) 
+  end
 
   def update
-    sql = "UPDATE students SET (balance, type, holder) =
+    sql = "UPDATE banks SET (balance, type, holder) =
     (#{ @balance },'#{@type}','#{@holder}')
     WHERE id = #{@id};"
     SqlRunner.run(sql) 
@@ -46,8 +56,8 @@ class Bank
   end
 
   def self.get_many(sql)
-    students = SqlRunner.run(sql)
-    result = students.map{|student| Student.new(student)}
+    banks = SqlRunner.run(sql)
+    result = banks.map{|bank| Bank.new(bank)}
     return result   
   end
 
@@ -55,7 +65,7 @@ class Bank
     sql= "SELECT clients.* FROM clients 
     INNER JOIN payments ON payments.bank_id = bank.id
     where payments.client_id = #{@id};"
-    result = GymClass.get_many(sql)
+    result = Bank.get_many(sql)
     return result
   end
 end

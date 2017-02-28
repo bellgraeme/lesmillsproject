@@ -1,0 +1,37 @@
+<form method= "POST" action = "/classes/<%= @gymclass.id %>">
+  
+  <H3>Update Class</H3>
+  
+  <h2>Venue List</h2>
+    <ul>
+    <% for venue in @venues%>
+      <li> 
+          Venue ID: <%= venue.id %> Venue Name: <%= venue.name %> Venue Location: <%= venue.location %><br>
+      </li><%end%>
+    </ul>
+  </nav>
+
+
+  <label for="name">Type:</label>
+  <input
+  type="text"
+  id="type"
+  name="type"
+  value="<%= @gymclass.type %>"/>
+
+  <label for="time">Time:</label>
+  <input type="text"
+  id="time"
+  name="time"
+  value="<%= @gymclass.time %>"/>
+
+
+  <label for="venue_id">Venue ID:</label>
+  <select id="venue_id" name="venue_id">
+  <% for venue in @venues%>
+    <option><%= venue.id%></option>
+    <%end%>
+
+  <input type="submit" value="Update"/>
+
+</form>

@@ -5,6 +5,9 @@ require_relative( '../models/gym_class.rb' )
 require_relative( '../models/register.rb' )
 require_relative( '../models/student.rb' )
 require_relative( '../models/venue.rb' )
+require_relative( '../models/bank.rb' )
+require_relative( '../models/client.rb' )
+require_relative( '../models/payment.rb' )
 
 
 # INDEX - READ for ALL

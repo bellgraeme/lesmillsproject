@@ -1,35 +1,19 @@
-
-
 <div>
-  <h1>Classes</h1>
+  <h1>Payments</h1>
 
-  <p >
-    <a class = "button" href="/classes/new">New Class</a>
-  </p>
-
-  <ul class = "list" >
-    <% for gymclass in @gymclasses %>
-    <li>
-      <p>Type: <%=gymclass.type %></p>
-      <p>Time: <%=gymclass.time %></p>
-      <% for venue in @venues%>
-      <% if venue.id == gymclass.venue_id%>
-      <p>Location: <%= venue.location %></p>
-      <p>Gym Name: <%= venue.name %></p>
-      <% end %><% end %>
-      <div id="bttn-cont" >
-        <form action="/classes/<%= gymclass.id %>" method="GET">
-          <input  type="submit" value="View" />
-        </form>
-
-        <form action="/register/<%= gymclass.id%>" method="GET">
-          <input  type="submit" value="Add Student"/>
-        </form>
-      </div>
-      <hr />   
-    </li>
-    <% end %> 
-  </ul>
+<ul class = "list" >
+  <% for payment in @payments %>
+  <li>
+    <%for client in @clients%>
+    <%if client.id == payment.client_id%>
+    <p>Client: <%=client.name %></p>
+    <p>Time: <%=payment.time %></p>
+    <p>Amount: <%=payment.amount%></p> 
+    <% end %><% end %>
+    <hr />   
+  </li>
+  <%end%>
+</ul>
 </div>
 
 

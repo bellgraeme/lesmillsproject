@@ -10,27 +10,37 @@ class Client
 
   def self.find( id )
     sql = "SELECT * FROM clients WHERE id= #{id};"
-    student = SqlRunner.run( sql )
-    result = Client.new( student.first )
+    client = SqlRunner.run( sql )
+    result = Client.new( client.first )
     return result
+  end
+
+  def billing(amount)
+    sql= "UPDATE clients SET (balance) = (balance - :amount) WHERE id = #{id};"
+    SqlRunner.run(sql) 
+  end
+
+  def payment(amount)
+    sql= "UPDATE clients SET (balance) = (balance + :amount) WHERE id = #{id};"
+    SqlRunner.run(sql) 
   end
 
   def save
     sql ="INSERT INTO clients (name, balance) VALUES 
-    ('#{ @name }', #{ @balance }) RETURNING *"
+    ('#{ @name }', #{ @balance }) RETURNING *;"
     results = SqlRunner.run(sql)
     @id = results[0]['id'].to_i
   end
 
   def update
     sql = "UPDATE clients SET (name, balance) =
-     ('#{ @name }', #{ @balance })
+    ('#{ @name }', #{ @balance })
     WHERE id = #{@id};"
     SqlRunner.run(sql) 
   end
 
   def delete
-    sql = "DELETE FROM clients where id = #{id}"
+    sql = "DELETE FROM clients where id = #{id};"
     SqlRunner.run( sql )
   end
 
@@ -46,7 +56,7 @@ class Client
 
   def self.get_many(sql)
     clients = SqlRunner.run(sql)
-    result = clients.map{|student| Student.new(student)}
+    result = clients.map{|client| Client.new(client)}
     return result   
   end
 
@@ -54,7 +64,7 @@ class Client
     sql= "SELECT bank.* FROM bank 
     INNER JOIN payments ON payments.client_id = client.id
     WHERE payments.bank_id = #{@id};"
-    result = GymClass.get_many(sql)
+    result = Client.get_many(sql)
     return result
   end
 
