@@ -20,7 +20,7 @@ class Student
   end
 
   def self.find( id )
-    sql = "SELECT * FROM students WHERE id=#{id};"
+    sql = "SELECT * FROM students WHERE id= #{id};"
     student = SqlRunner.run( sql )
     result = Student.new( student.first )
     return result
@@ -64,7 +64,7 @@ class Student
   def classes
     sql= "SELECT classes.* FROM classes 
     INNER JOIN register ON register.class_id = classes.id
-    where register.class_id = #{@id};"
+    where register.student_id = #{@id};"
     result = GymClass.get_many(sql)
     return result
   end

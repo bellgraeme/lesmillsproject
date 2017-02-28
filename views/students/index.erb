@@ -1,22 +1,26 @@
 <h1>Students</h1>
 
 
-  <a class = "button" href="/students/new">Enroll Student</a>
+<a class = "button" href="/students/new">Enroll Student</a>
 
 
 <ul class = "list">
   <% for student in @students %>
   <li>
-  <p> First Name: <%=student.first_name %></p>
-  <p> Last Name: <%=student.last_name %></p>
-  <p>Age: <%=student.age %></p>
-  <p>Gender: <%=student.gender %></p>
-    <p>
+    <p> First Name: <%=student.first_name %></p>
+    <p> Last Name: <%=student.last_name %></p>
+    <p>Age: <%=student.age %></p>
+    <p>Gender: <%=student.gender %></p>
+    <div id="bttn-cont" >
       <form action="/students/<%= student.id %>" method="GET">
         <input  type="submit" value="View" />
       </form>
-      <hr />
-    </p>
+
+      <form action="/students/<%= student.id %>/classes" method="GET">
+        <input  type="submit" value="Classes" />
+      </form>
+    </div>
+    <hr /> 
   </li>
   <% end %>
 </ul>

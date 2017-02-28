@@ -1,3 +1,4 @@
+DROP TABLE accounts;
 DROP TABLE register;
 DROP TABLE classes;
 DROP TABLE venues;
@@ -29,3 +30,7 @@ id SERIAL4 PRIMARY KEY,
 class_id INT4 references classes(id) ON DELETE CASCADE,
 student_id INT4 references students(id) ON DELETE CASCADE
 );
+
+CREATE TABLE accounts(
+
+)

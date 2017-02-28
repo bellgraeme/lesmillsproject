@@ -3,11 +3,12 @@
 <p>Age: <%=@student.age %></p>
 <p>Gender: <%=@student.gender %></p>
 
-
+<div id="bttn-cont" >
 <form method="GET" action="/students/<%= @student.id %>/edit">
-  <input type="submit" value="Udate Details"/>
+  <input type="submit" value="Update Details"/>
 </form>
 
 <form action = "/students/<%=@student.id%>/delete" method = "POST">
 <input type="submit" value="Delete" >
 </form>
+</div>

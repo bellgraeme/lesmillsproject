@@ -2,11 +2,12 @@
 <p>Location : <%= @venue.location %></p>
 
 
-
+<div id="bttn-cont" >
 <form method="GET" action="/venues/<%= @venue.id %>/edit">
-  <input type="submit" value="Edit Venue"/>
+  <input type="submit" value="Update Venue"/>
 </form>
 
 <form action = "/venues/<%=@venue.id%>/delete" method = "POST">
 <input type="submit" value="Delete" >
 </form>
+</div>

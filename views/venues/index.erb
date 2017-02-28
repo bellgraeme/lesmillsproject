@@ -1,19 +1,24 @@
 <h1>Venues</h1>
 
 
-  <a  class = "button" href="/venues/new">Create New Venue</a>
+<a  class = "button" href="/venues/new">Create New Venue</a>
 
 <ul class = "list">
   <% for venue in @venues %>
   <li>
-  <p>Name: <%=venue.name %></p>
-  <p>Location: <%=venue.location %></p>
-    <p>
+    <p>Name: <%=venue.name %></p>
+    <p>Location: <%=venue.location %></p>
+    <div id="bttn-cont" >
       <form action="/venues/<%= venue.id %>" method="GET">
         <input class="btn btn--danger" type="submit" value="View" />
       </form>
-      <hr />
-    </p>
+
+      <form action="/venues/<%= venue.id %>/classes" method="GET">
+        <input class="btn btn--danger" type="submit" value="Students & Classes" />
+      </form>
+    </div>
+    <hr />
+    
   </li>
   <% end %>
 </ul>

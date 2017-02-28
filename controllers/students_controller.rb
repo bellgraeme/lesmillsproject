@@ -9,7 +9,7 @@ require_relative( '../models/venue.rb' )
 
 # INDEX - READ for ALL
 get '/students' do
- @students = Student.all()
+  @students = Student.all()
   erb (:'students/index')
 end
 
@@ -18,23 +18,32 @@ get '/students/new' do
   erb(:"students/new")
 end
 
+get '/students/:id/classes' do
+  @student = Student.find(params[:id])
+  @venues = @student.venue
+  @classes = @student.classes
+  erb(:"students/classes")
+end
+
 # SHOW - READ for ID
-  get '/students/:id' do 
+get '/students/:id' do 
   @student = Student.find( params[:id] )
   erb (:"students/show")
  end 
 
 # CREATE - CREATE - submit form
- post '/students' do
-    @student = Student.new(params)
-    @student.save()
-    erb(:"students/create")
+post '/students' do
+  @student = Student.new(params)
+  @student.save()
+  erb(:"students/create")
 end
+
+
 
 # EDIT- UPDATE - Create form
 get '/students/:id/edit' do
- @student = Student.find( params[:id] )
- erb(:"students/update")
+  @student = Student.find( params[:id] )
+  erb(:"students/update")
 end
 
 # UPDATE - UPDATE - submit form
@@ -47,8 +56,8 @@ end
 
 # DESTROY - DELETE
 post '/students/:id/delete' do
- @student = Student.find(params[:id]) 
- @student.delete
-redirect to '/students'
+  @student = Student.find(params[:id]) 
+  @student.delete
+  redirect to '/students'
 end
 

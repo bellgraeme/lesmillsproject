@@ -23,6 +23,13 @@ end
   erb (:"venues/show")
  end 
 
+ get '/venues/:id/classes' do
+  @venue = Venue.find(params[:id])
+  @classes = @venue.classes
+  @students = @venue.students
+  erb(:"venues/classes")
+ end
+
 # CREATE - CREATE - submit form
  post '/venues' do
     @venue = Venue.new(params)

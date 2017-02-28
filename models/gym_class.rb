@@ -50,8 +50,9 @@ class GymClass
 
   def self.get_many(sql)
     classes = SqlRunner.run(sql)
-    result = classes.map{ |x| GymClass.new(x) }
+    result = classes.map{ |place| GymClass.new(place) }
     return result   
+
   end
 
   def students

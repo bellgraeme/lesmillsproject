@@ -1,0 +1,22 @@
+
+
+<h2><%=@student.full_name%></h2>
+<h3>Classes</h3>
+<p><ul>
+  <% for gymclass in @classes do %>
+  <li>
+    <p>Class Type: <%=gymclass.type%></p>
+    <p>Class Time: <%=gymclass.time%></p><%end%>
+  </li>
+  
+</ul></p>
+
+<H3> Venues</H3>
+
+<ul>
+  <%for venue in @venues%>
+  <li><p>Class Location: <%=venue.location%></p>
+    <p>Class Gym: <%=venue.name%></p><%end%>
+    <hr/>
+  </li>
+</ul>

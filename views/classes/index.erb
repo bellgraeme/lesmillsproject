@@ -1,31 +1,31 @@
 <div>
-<h1>Classes</h1>
+  <h1>Classes</h1>
 
-<p >
-  <a class = "button" href="/classes/new">New Class</a>
-</p>
+  <p >
+    <a class = "button" href="/classes/new">New Class</a>
+  </p>
 
-<ul class = "list" >
-  <% for gymclass in @gymclasses %>
-  <li>
-    <p>Type: <%=gymclass.type %></p>
-    <p>Time: <%=gymclass.time %></p>
-    <% for venue in @venues%>
-    <% if venue.id == gymclass.venue_id%>
-    <p>Location: <%= venue.location %></p>
-    <p>Gym Name: <%= venue.name %></p>
-    <% end %><% end %>
-    <div id="bttn-cont" >
-      <form action="/classes/<%= gymclass.id %>" method="GET">
-        <input  type="submit" value="View" />
-      </form>
+  <ul class = "list" >
+    <% for gymclass in @gymclasses %>
+    <li>
+      <p>Type: <%=gymclass.type %></p>
+      <p>Time: <%=gymclass.time %></p>
+      <% for venue in @venues%>
+      <% if venue.id == gymclass.venue_id%>
+      <p>Location: <%= venue.location %></p>
+      <p>Gym Name: <%= venue.name %></p>
+      <% end %><% end %>
+      <div id="bttn-cont" >
+        <form action="/classes/<%= gymclass.id %>" method="GET">
+          <input  type="submit" value="View" />
+        </form>
 
-      <form action="/register/<%= gymclass.id%>" method="GET">
-      <input  type="submit" value="Add Student"/>
-      </form>
-    </div>
-    <hr />   
-  </li>
-  <% end %> 
-</ul>
+        <form action="/register/<%= gymclass.id%>" method="GET">
+          <input  type="submit" value="Add Student"/>
+        </form>
+      </div>
+      <hr />   
+    </li>
+    <% end %> 
+  </ul>
 </div>
