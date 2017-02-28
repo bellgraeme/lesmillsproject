@@ -1,0 +1,17 @@
+<form method="POST" action="/register">
+
+  <label for="student">Student:</label>
+  <select id = "student-id" name = "student_id">
+  <% for student in @students %>
+  <option value = "<%= student.id%>"><%= student.full_name%></option>
+  <%end%></select>
+
+  <label for="gymclass">Class:</label>
+  <select id = "gymclass-id" name = "class_id">
+  <option value="<%=@gymclass.id%>"><%=@gymclass.type%></option></select>
+
+<input type="submit" value= "Add Student"></form>
+
+
+
+

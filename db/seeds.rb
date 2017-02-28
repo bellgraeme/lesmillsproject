@@ -2,10 +2,16 @@ require_relative('../models/gym_class.rb')
 require_relative('../models/register.rb')
 require_relative('../models/student.rb')
 require_relative('../models/venue.rb')
+require_relative('../models/bank.rb')
+require_relative('../models/client.rb')
+require_relative('../models/payment.rb')
 require 'pg'
 require 'pry'
 require 'pry-byebug'
 
+Payment.delete_all
+Client.delete_all
+Bank.delete_all
 Register.delete_all
 GymClass.delete_all
 Student.delete_all
@@ -68,6 +74,41 @@ register2 = Register.new(
   'student_id' => student2.id
   )
 register2.save()
+
+client1 = Client.new(
+  'name' => 'Barbra Streisand',
+  'balance' => 800,
+  )
+client1.save()
+
+client2 = Client.new(
+  'name' => 'Sylvester Stalone',
+  'balance' => 43,
+  )
+client2.save
+
+bank1 = Bank.new(
+  'balance' => 200,
+  'type'=> 'current',
+  'holder' => 'Myself'
+  )
+bank1.save
+
+payment1 = Payment.new(
+  'bank_id' => bank1.id,
+  'client_id' => client1.id,
+  'amount' => 200
+  )
+payment1.save
+
+payment2 = Payment.new(
+  'bank_id' => bank1.id,
+  'client_id' => client2.id,
+  'amount' => 12
+  )
+payment2.save
+
+
 
 binding.pry
 nil

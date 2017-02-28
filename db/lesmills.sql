@@ -41,13 +41,15 @@ balance INT4
 
 CREATE TABLE bank(
 id SERIAL4 PRIMARY KEY,
-balance INT4
+balance INT4,
+type VARCHAR(255),
+holder VARCHAR(255)
 );
 
 CREATE TABLE payments(
 id SERIAL4 PRIMARY KEY,
-bank_id references bank(id),
-client_id references clients(id),
+bank_id INT4 references bank(id),
+client_id INT4 references clients(id),
 amount INT4,
 time TIME
 );
