@@ -1,5 +1,7 @@
-DROP TABLE accounts;
+DROP TABLE payments;
 DROP TABLE register;
+DROP TABLE clients;
+DROP TABLE bank;
 DROP TABLE classes;
 DROP TABLE venues;
 DROP TABLE students;
@@ -31,6 +33,23 @@ class_id INT4 references classes(id) ON DELETE CASCADE,
 student_id INT4 references students(id) ON DELETE CASCADE
 );
 
-CREATE TABLE accounts(
+CREATE TABLE clients(
+id SERIAL4 PRIMARY KEY,
+name VARCHAR(255),
+balance INT4
+);
 
-)
+CREATE TABLE bank(
+id SERIAL4 PRIMARY KEY,
+balance INT4
+);
+
+CREATE TABLE payments(
+id SERIAL4 PRIMARY KEY,
+bank_id references bank(id),
+client_id references clients(id),
+amount INT4,
+time TIME
+);
+
+
