@@ -24,17 +24,19 @@ class Bank
   end
   
   def billing(amount)
-    sql= "UPDATE clients SET (balance) = (balance - amount) WHERE id = #{@id};"
-    SqlRunner.run(sql) 
+    @balance = @balance - amount.to_i
+    # sql= "UPDATE bank SET (balance) = (balance - #{amount}) WHERE id = #{@id};"
+    # SqlRunner.run(sql) 
   end
 
   def payment(amount)
-    sql= "UPDATE banks SET (balance) = (balance + amount) WHERE id = #{@id};"
-    SqlRunner.run(sql) 
+    @balance = @balance + amount.to_i
+    # sql= "UPDATE bank SET (balance) = (balance + #{amount}) WHERE id = #{@id};"
+    # SqlRunner.run(sql) 
   end
 
   def update
-    sql = "UPDATE banks SET (balance, type, holder) =
+    sql = "UPDATE bank SET (balance, type, holder) =
     (#{ @balance },'#{@type}','#{@holder}')
     WHERE id = #{@id};"
     SqlRunner.run(sql) 

@@ -20,27 +20,23 @@ end
 
 # NEW -  CREATE - get form
 get '/accounts/new' do
-  @banks = Bank.all()
-  @clients =Client.all()
-  @payments = Payment.all()
+  @clients = Client.all_actors()
   erb(:"accounts/new")
 end
 
 # SHOW - READ for ID
-get '/payments/:id' do
+get '/accounts/:id' do
   @banks = Bank.all()
   @clients =Client.all() 
   @payment = Payment.find( params[:id] )
-  erb (:"payments/show")
+  erb (:"accounts/show")
 end 
 
 # CREATE - CREATE - submit form
-post '/payments' do
-  @banks = Bank.all()
-  @clients =Client.all()
-  @payment = Payment.new(params)
-  @payment.save()
-  erb(:"accounts/create")
+post '/accounts' do
+  @client = Client.new(params)
+  @client.save()
+  redirect to '/accounts'
 end
 
 # EDIT- UPDATE - Create form

@@ -16,13 +16,15 @@ class Client
   end
 
   def billing(amount)
-    sql= "UPDATE clients SET (balance) = (balance - :amount) WHERE id = #{id};"
-    SqlRunner.run(sql) 
+    @balance = @balance - amount.to_i
+    # sql= "UPDATE clients SET (balance) = (balance - #{amount}) WHERE id = #{id};"
+    # SqlRunner.run(sql) 
   end
 
   def payment(amount)
-    sql= "UPDATE clients SET (balance) = (balance + :amount) WHERE id = #{id};"
-    SqlRunner.run(sql) 
+    @balance = @balance - amount.to_i
+    # sql= "UPDATE clients SET (balance) = (balance + #{amount}) WHERE id = #{id};"
+    # SqlRunner.run(sql) 
   end
 
   def save
@@ -42,6 +44,16 @@ class Client
   def delete
     sql = "DELETE FROM clients where id = #{id};"
     SqlRunner.run( sql )
+  end
+
+  def self.all_actors
+    sql1 = "SELECT * From students"
+    students = SqlRunner.run(sql1)
+    clients = students.map{|student| "#{student['first_name']} #{student['last_name']}"}
+    sql2 = "SELECT venues.name FROM venues"
+    venues = SqlRunner.run(sql2)
+    clients.concat venues.map {|venue| venue["name"] }
+    return clients
   end
 
   def self.all

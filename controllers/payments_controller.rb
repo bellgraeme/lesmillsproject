@@ -26,26 +26,37 @@ get '/payments/new' do
   erb(:"payments/new")
 end
 
-# SHOW - READ for ID
-get '/payments/:id' do
+get '/payments/billing' do
   @banks = Bank.all()
-  @clients =Client.all() 
-  @payment = Payment.find( params[:id] )
-  erb (:"payments/show")
-end 
+  @clients =Client.all()
+  @payments = Payment.all()
+  erb(:"payments/billing")
+end
+
+post '/payments/billing' do
+  @payment = Payment.new(params)
+  @payment.save()
+  @bank = Bank.find(params[:bank_id])
+  @bank.billing(params[:amount])
+  @bank.update()
+  @client = Client.find(params[:client_id])
+  @client.payment(params[:amount])
+  @client.update()
+  erb (:"payments/create")
+end
 
 # CREATE - CREATE - submit form
 post '/payments' do
-  @banks = Bank.all()
-  @clients =Client.all()
   @payment = Payment.new(params)
+  @payment.save()
   @bank = Bank.find(params[:bank_id])
   @bank.payment(params[:amount])
+  @bank.update()
   @client = Client.find(params[:client_id])
   @client.billing(params[:amount])
-  @bank.update
-  @client.update
-  @payment.save()
+  @client.update()
+  p @bank
+  p @client
   erb(:"payments/create")
 end
 
@@ -64,12 +75,12 @@ post '/payments/billing' do
   end
 
 # EDIT- UPDATE - Create form
-get '/payments/:id/edit' do
-  @banks = Bank.all()
-  @clients =Client.all()
-  @payment = Payment.find( params[:id] )
-  erb(:"payments/update")
-end
+# get '/payments/:id/edit' do
+#   @banks = Bank.all()
+#   @clients =Client.all()
+#   @payment = Payment.find( params[:id] )
+#   erb(:"payments/update")
+# end
 
 # UPDATE - UPDATE - submit form
 post '/payments/:id' do

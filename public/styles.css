@@ -105,5 +105,36 @@ input[type=submit] {
 .bttn-cont{
   display: inline-flex;
   justify-content: center;
+}
+
+.button-acc{text-align: center;
+  margin-left: 5px;
+  display: block;
+  width:145px;
+  border-radius: 4px;
+  background-color: rgb(251, 211, 64);
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
 
 }
+.button-acc:hover{
+  background-color: rgb(254, 249, 230);
+  color:rgb(251, 211, 64);;
+}
+
+@media (width: 640px){
+  .button-acc{text-align: center;
+    margin-left: 5px;
+    display: block;
+    width:60px;
+    border-radius: 4px;
+    background-color: rgb(251, 211, 64);
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    font-size: 60%;
+
+
+}
+
