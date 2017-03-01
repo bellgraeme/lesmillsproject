@@ -33,6 +33,7 @@ get '/payments/billing' do
   erb(:"payments/billing")
 end
 
+
 post '/payments/billing' do
   @payment = Payment.new(params)
   @payment.save()
@@ -44,6 +45,7 @@ post '/payments/billing' do
   @client.update()
   erb (:"payments/create")
 end
+
 
 # CREATE - CREATE - submit form
 post '/payments' do
@@ -61,8 +63,6 @@ post '/payments' do
 end
 
 post '/payments/billing' do
-  @banks = Bank.all()
-  @clients =Client.all()
   @payment = Payment.new(params)
   @bank = Bank.find(params[:bank_id])
   @bank.billing(params[:amount])
@@ -72,7 +72,7 @@ post '/payments/billing' do
   @client.update
   @payment.save()
   erb(:"payments/billing")
-  end
+end
 
 # EDIT- UPDATE - Create form
 # get '/payments/:id/edit' do
@@ -83,14 +83,14 @@ post '/payments/billing' do
 # end
 
 # UPDATE - UPDATE - submit form
-post '/payments/:id' do
-  @banks = Bank.all()
-  @clients =Client.all()
-  @payment = Payment.new(params)
-  @payment.update() 
-  erb(:"payments/update")
-  redirect to "/payments"
-end
+# post '/payments/:id' do
+#   @banks = Bank.all()
+#   @clients =Client.all()
+#   @payment = Payment.new(params)
+#   @payment.update() 
+#   erb(:"payments/update")
+#   redirect to "/payments"
+# end
 
 # DESTROY - DELETE
 post '/payments/:id/delete' do

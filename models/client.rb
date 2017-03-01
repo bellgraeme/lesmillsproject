@@ -22,7 +22,7 @@ class Client
   end
 
   def payment(amount)
-    @balance = @balance - amount.to_i
+    @balance = @balance + amount.to_i
     # sql= "UPDATE clients SET (balance) = (balance + #{amount}) WHERE id = #{id};"
     # SqlRunner.run(sql) 
   end
