@@ -54,7 +54,6 @@ post '/payments/:id' do
   @clients =Client.all()
   @payment = Payment.new(params)
   @payment.update() 
-  erb(:"payments/update")
   redirect to "/payments"
 end
 
